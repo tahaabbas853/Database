@@ -1,0 +1,160 @@
+ 1.
+select first_name, last_name, jobs.job_id from employees inner join jobs on employees.job_id = jobs.job_id where job_title like "%Clerk" and salary >=  (select min_salary from jobs where job_title = "Programmer");
+------------+-----------+----------+
+| first_name | last_name | job_id   |
++------------+-----------+----------+
+| Nandita    | Sarchand  | SH_CLERK |
+| Alexis     | Bull      | SH_CLERK |
+| Sarah      | Bell      | SH_CLERK |
++------------+-----------+----------+
+3 rows in set (0.001 sec)
+
+
+2.
+select first_name, last_name from employees where salary not in (select salary from employees where first_name = 'Peter' or first_name = 'Lisa') order by first_name ;
++-------------+-------------+
+| first_name  | last_name   |
++-------------+-------------+
+| Adam        | Fripp       |
+| Alana       | Walsh       |
+| Alberto     | Errazuriz   |
+| Alexander   | Khoo        |
+| Alexis      | Bull        |
+| Alyssa      | Hutton      |
+| Amit        | Banda       |
+| Anthony     | Cabrio      |
+| Britney     | Everett     |
+| Bruce       | Ernst       |
+| Charles     | Johnson     |
+| Christopher | Olsen       |
+| Clara       | Vishney     |
+| Curtis      | Davies      |
+| Danielle    | Greene      |
+| David       | Lee         |
+| David       | Bernstein   |
+| David       | Austin      |
+| Den         | Raphaely    |
+| Diana       | Lorentz     |
+| Donald      | OConnell    |
+| Douglas     | Grant       |
+| Eleni       | Zlotkey     |
+| Elizabeth   | Bates       |
+| Ellen       | Abel        |
+| Gerald      | Cambrault   |
+| Girard      | Geoni       |
+| Guy         | Himuro      |
+| Hazel       | Philtanker  |
+| Irene       | Mikkilineni |
+| Ismael      | Sciarra     |
+| Jack        | Livingston  |
+| James       | Landry      |
+| Jason       | Mallin      |
+| Jean        | Fleaur      |
+| Jennifer    | Dilly       |
+| Jennifer    | Whalen      |
+| John        | Russell     |
+| John        | Chen        |
+| John        | Seo         |
+| Jonathon    | Taylor      |
+| Jose Manuel | Urman       |
+| Julia       | Dellinger   |
+| Julia       | Nayer       |
+| Karen       | Partners    |
+| Kelly       | Chung       |
+| Kevin       | Feeney      |
+| Kevin       | Mourgos     |
+| Ki          | Gee         |
+| Kimberely   | Grant       |
+| Laura       | Bissot      |
+| Lex         | De Haan     |
+| Lindsey     | Smith       |
+| Louise      | Doran       |
+| Luis        | Popp        |
+| Mattea      | Marvins     |
+| Matthew     | Weiss       |
+| Michael     | Rogers      |
+| Michael     | Hartstein   |
+| Mozhe       | Atkinson    |
+| Nancy       | Greenberg   |
+| Nandita     | Sarchand    |
+| Nanette     | Cambrault   |
+| Neena       | Kochhar     |
+| Oliver      | Tuvault     |
+| Pat         | Fay         |
+| Patrick     | Sully       |
+| Payam       | Kaufling    |
+| Randall     | Matos       |
+| Renske      | Ladwig      |
+| Samuel      | McCain      |
+| Sarah       | Bell        |
+| Sarath      | Sewall      |
+| Shanta      | Vollman     |
+| Shelley     | Higgins     |
+| Shelli      | Baida       |
+| Sigal       | Tobias      |
+| Stephen     | Stiles      |
+| Steven      | King        |
+| Steven      | Markle      |
+| Sundar      | Ande        |
+| Sundita     | Kumar       |
+| Susan       | Mavris      |
+| Tayler      | Fox         |
+| Timothy     | Gates       |
+| TJ          | Olson       |
+| Trenna      | Rajs        |
+| Valli       | Pataballa   |
+| Vance       | Jones       |
+| William     | Smith       |
+| William     | Gietz       |
+| Winston     | Taylor      |
++-------------+-------------+
+92 rows in set (0.002 sec)
+
+
+3.
+select "The department whose id is", (select department_id), "is in ", (select location_id), "and its name is ", (department_name)  from departments;
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+| The department whose id is | (select department_id) | is in  | (select location_id) | and its name is  | department_name      |
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+| The department whose id is |                     10 | is in  |                 1700 | and its name is  | Administration       |
+| The department whose id is |                     20 | is in  |                 1800 | and its name is  | Marketing            |
+| The department whose id is |                     30 | is in  |                 1700 | and its name is  | Purchasing           |
+| The department whose id is |                     40 | is in  |                 2400 | and its name is  | Human Resources      |
+| The department whose id is |                     50 | is in  |                 1500 | and its name is  | Shipping             |
+| The department whose id is |                     60 | is in  |                 1400 | and its name is  | IT                   |
+| The department whose id is |                     70 | is in  |                 2700 | and its name is  | Public Relations     |
+| The department whose id is |                     80 | is in  |                 2500 | and its name is  | Sales                |
+| The department whose id is |                     90 | is in  |                 1700 | and its name is  | Executive            |
+| The department whose id is |                    100 | is in  |                 1700 | and its name is  | Finance              |
+| The department whose id is |                    110 | is in  |                 1700 | and its name is  | Accounting           |
+| The department whose id is |                    120 | is in  |                 1700 | and its name is  | Treasury             |
+| The department whose id is |                    130 | is in  |                 1700 | and its name is  | Corporate Tax        |
+| The department whose id is |                    140 | is in  |                 1700 | and its name is  | Control And Credit   |
+| The department whose id is |                    150 | is in  |                 1700 | and its name is  | Shareholder Services |
+| The department whose id is |                    160 | is in  |                 1700 | and its name is  | Benefits             |
+| The department whose id is |                    170 | is in  |                 1700 | and its name is  | Manufacturing        |
+| The department whose id is |                    180 | is in  |                 1700 | and its name is  | Construction         |
+| The department whose id is |                    190 | is in  |                 1700 | and its name is  | Contracting          |
+| The department whose id is |                    200 | is in  |                 1700 | and its name is  | Operations           |
+| The department whose id is |                    210 | is in  |                 1700 | and its name is  | IT Support           |
+| The department whose id is |                    220 | is in  |                 1700 | and its name is  | NOC                  |
+| The department whose id is |                    230 | is in  |                 1700 | and its name is  | IT Helpdesk          |
+| The department whose id is |                    240 | is in  |                 1700 | and its name is  | Government Sales     |
+| The department whose id is |                    250 | is in  |                 1700 | and its name is  | Retail Sales         |
+| The department whose id is |                    260 | is in  |                 1700 | and its name is  | Recruiting           |
+| The department whose id is |                    270 | is in  |                 1700 | and its name is  | Payroll              |
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+27 rows in set (0.001 sec)
+
+4.
+select max(salary) from employees order by salary desc limit 3;
++-------------+
+| max(salary) |
++-------------+
+|    24000.00 |
++-------------+
+1 row in set (0.001 sec)
+
+
+
+

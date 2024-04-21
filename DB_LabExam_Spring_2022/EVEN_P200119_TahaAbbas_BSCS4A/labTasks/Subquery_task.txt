@@ -1,0 +1,90 @@
+			SUBQUERY TASKS
+			COMPANY DBMS
+
+
+NAME: TAHA ABBAS
+CLASS: BSCS-4A
+ROLL NO: P200119
+DATE: 07 04 2022
+------------------------------------------------------------
+
+
+1. Display the employee who got the maximum salary.
+
+select empno, ename, job, salary from emp where salary = (select max(salary) from emp); 
++-------+-------+-----------+--------+
+| empno | ename | job       | salary |
++-------+-------+-----------+--------+
+|  7839 | King  | President |   6500 |
++-------+-------+-----------+--------+
+
+
+
+2. Display the employees who are working in Sales department.
+
+select empno, ename, job, salary from emp where deptno = (select deptno from dept where dname = "Sales");
++-------+--------+----------+--------+
+| empno | ename  | job      | salary |
++-------+--------+----------+--------+
+|  7499 | Allen  | Salesman |   2000 |
+|  7521 | Ward   | Salesman |   1650 |
+|  7654 | Martin | Salesman |   1650 |
+|  7698 | Blake  | Manager  |   3250 |
+|  7844 | Turner | Salesman |   1900 |
+|  7900 | James  | Clerk    |   1350 |
++-------+--------+----------+--------+
+
+3. Display the employees who are working in “New York”.
+
+select empno, ename, job, salary from emp where deptno = (select deptno from dept where location = "New York");
++-------+--------+-----------+--------+
+| empno | ename  | job       | salary |
++-------+--------+-----------+--------+
+|  7782 | Clark  | Manager   |   2850 |
+|  7839 | King   | President |   6500 |
+|  7934 | Miller | Clerk     |   1700 |
++-------+--------+-----------+--------+
+
+4. Find out no. of employees working in “Sales” department.
+
+select count(*) AS NO_of_EMP from emp where deptno = (select deptno from dept where dname = "Sales");
++-----------+
+| NO_of_EMP |
++-----------+
+|         6 |
++-----------+
+
+5. List out the employees who earn more than every employee in department 30.
+
+select empno, ename, job, salary from emp where salary > (select max(salary) from emp where deptno = 30);
++-------+-------+-----------+--------+
+| empno | ename | job       | salary |
++-------+-------+-----------+--------+
+|  7566 | Jones | Manager   |   3375 |
+|  7788 | Scott | Analyst   |   3500 |
+|  7839 | King  | President |   6500 |
+|  7902 | Ford  | Analyst   |   3500 |
++-------+-------+-----------+--------+
+
+
+6. List out the employees who earn more than the lowest salary in department 30.
+
+select empno, ename, job, salary from emp where salary > (select min(salary) from emp where deptno = 30);
++-------+--------+-----------+--------+
+| empno | ename  | job       | salary |
++-------+--------+-----------+--------+
+|  7499 | Allen  | Salesman  |   2000 |
+|  7521 | Ward   | Salesman  |   1650 |
+|  7566 | Jones  | Manager   |   3375 |
+|  7654 | Martin | Salesman  |   1650 |
+|  7698 | Blake  | Manager   |   3250 |
+|  7782 | Clark  | Manager   |   2850 |
+|  7788 | Scott  | Analyst   |   3500 |
+|  7813 | David  | Clerk     |   1500 |
+|  7839 | King   | President |   6500 |
+|  7844 | Turner | Salesman  |   1900 |
+|  7876 | Adams  | Clerk     |   1500 |
+|  7902 | Ford   | Analyst   |   3500 |
+|  7934 | Miller | Clerk     |   1700 |
+
+

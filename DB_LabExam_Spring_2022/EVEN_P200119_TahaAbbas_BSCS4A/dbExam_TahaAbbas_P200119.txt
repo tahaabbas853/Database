@@ -1,0 +1,422 @@
+===============================P200119 TAHA ABBAS======================================
+
+Q1
+=============================
+1.
+select first_name, last_name, jobs.job_id from employees inner join jobs on employees.job_id = jobs.job_id where job_title like "%Clerk" and salary >=  (select min_salary from jobs where job_title = "Programmer");
+------------+-----------+----------+
+| first_name | last_name | job_id   |
++------------+-----------+----------+
+| Nandita    | Sarchand  | SH_CLERK |
+| Alexis     | Bull      | SH_CLERK |
+| Sarah      | Bell      | SH_CLERK |
++------------+-----------+----------+
+3 rows in set (0.001 sec)
+
+
+2.
+select first_name, last_name from employees where salary not in (select salary from employees where first_name = 'Peter' or first_name = 'Lisa') order by first_name ;
++-------------+-------------+
+| first_name  | last_name   |
++-------------+-------------+
+| Adam        | Fripp       |
+| Alana       | Walsh       |
+| Alberto     | Errazuriz   |
+| Alexander   | Khoo        |
+| Alexis      | Bull        |
+| Alyssa      | Hutton      |
+| Amit        | Banda       |
+| Anthony     | Cabrio      |
+| Britney     | Everett     |
+| Bruce       | Ernst       |
+| Charles     | Johnson     |
+| Christopher | Olsen       |
+| Clara       | Vishney     |
+| Curtis      | Davies      |
+| Danielle    | Greene      |
+| David       | Lee         |
+| David       | Bernstein   |
+| David       | Austin      |
+| Den         | Raphaely    |
+| Diana       | Lorentz     |
+| Donald      | OConnell    |
+| Douglas     | Grant       |
+| Eleni       | Zlotkey     |
+| Elizabeth   | Bates       |
+| Ellen       | Abel        |
+| Gerald      | Cambrault   |
+| Girard      | Geoni       |
+| Guy         | Himuro      |
+| Hazel       | Philtanker  |
+| Irene       | Mikkilineni |
+| Ismael      | Sciarra     |
+| Jack        | Livingston  |
+| James       | Landry      |
+| Jason       | Mallin      |
+| Jean        | Fleaur      |
+| Jennifer    | Dilly       |
+| Jennifer    | Whalen      |
+| John        | Russell     |
+| John        | Chen        |
+| John        | Seo         |
+| Jonathon    | Taylor      |
+| Jose Manuel | Urman       |
+| Julia       | Dellinger   |
+| Julia       | Nayer       |
+| Karen       | Partners    |
+| Kelly       | Chung       |
+| Kevin       | Feeney      |
+| Kevin       | Mourgos     |
+| Ki          | Gee         |
+| Kimberely   | Grant       |
+| Laura       | Bissot      |
+| Lex         | De Haan     |
+| Lindsey     | Smith       |
+| Louise      | Doran       |
+| Luis        | Popp        |
+| Mattea      | Marvins     |
+| Matthew     | Weiss       |
+| Michael     | Rogers      |
+| Michael     | Hartstein   |
+| Mozhe       | Atkinson    |
+| Nancy       | Greenberg   |
+| Nandita     | Sarchand    |
+| Nanette     | Cambrault   |
+| Neena       | Kochhar     |
+| Oliver      | Tuvault     |
+| Pat         | Fay         |
+| Patrick     | Sully       |
+| Payam       | Kaufling    |
+| Randall     | Matos       |
+| Renske      | Ladwig      |
+| Samuel      | McCain      |
+| Sarah       | Bell        |
+| Sarath      | Sewall      |
+| Shanta      | Vollman     |
+| Shelley     | Higgins     |
+| Shelli      | Baida       |
+| Sigal       | Tobias      |
+| Stephen     | Stiles      |
+| Steven      | King        |
+| Steven      | Markle      |
+| Sundar      | Ande        |
+| Sundita     | Kumar       |
+| Susan       | Mavris      |
+| Tayler      | Fox         |
+| Timothy     | Gates       |
+| TJ          | Olson       |
+| Trenna      | Rajs        |
+| Valli       | Pataballa   |
+| Vance       | Jones       |
+| William     | Smith       |
+| William     | Gietz       |
+| Winston     | Taylor      |
++-------------+-------------+
+92 rows in set (0.002 sec)
+
+
+3.
+select "The department whose id is", (select department_id), "is in ", (select location_id), "and its name is ", (department_name)  from departments;
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+| The department whose id is | (select department_id) | is in  | (select location_id) | and its name is  | department_name      |
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+| The department whose id is |                     10 | is in  |                 1700 | and its name is  | Administration       |
+| The department whose id is |                     20 | is in  |                 1800 | and its name is  | Marketing            |
+| The department whose id is |                     30 | is in  |                 1700 | and its name is  | Purchasing           |
+| The department whose id is |                     40 | is in  |                 2400 | and its name is  | Human Resources      |
+| The department whose id is |                     50 | is in  |                 1500 | and its name is  | Shipping             |
+| The department whose id is |                     60 | is in  |                 1400 | and its name is  | IT                   |
+| The department whose id is |                     70 | is in  |                 2700 | and its name is  | Public Relations     |
+| The department whose id is |                     80 | is in  |                 2500 | and its name is  | Sales                |
+| The department whose id is |                     90 | is in  |                 1700 | and its name is  | Executive            |
+| The department whose id is |                    100 | is in  |                 1700 | and its name is  | Finance              |
+| The department whose id is |                    110 | is in  |                 1700 | and its name is  | Accounting           |
+| The department whose id is |                    120 | is in  |                 1700 | and its name is  | Treasury             |
+| The department whose id is |                    130 | is in  |                 1700 | and its name is  | Corporate Tax        |
+| The department whose id is |                    140 | is in  |                 1700 | and its name is  | Control And Credit   |
+| The department whose id is |                    150 | is in  |                 1700 | and its name is  | Shareholder Services |
+| The department whose id is |                    160 | is in  |                 1700 | and its name is  | Benefits             |
+| The department whose id is |                    170 | is in  |                 1700 | and its name is  | Manufacturing        |
+| The department whose id is |                    180 | is in  |                 1700 | and its name is  | Construction         |
+| The department whose id is |                    190 | is in  |                 1700 | and its name is  | Contracting          |
+| The department whose id is |                    200 | is in  |                 1700 | and its name is  | Operations           |
+| The department whose id is |                    210 | is in  |                 1700 | and its name is  | IT Support           |
+| The department whose id is |                    220 | is in  |                 1700 | and its name is  | NOC                  |
+| The department whose id is |                    230 | is in  |                 1700 | and its name is  | IT Helpdesk          |
+| The department whose id is |                    240 | is in  |                 1700 | and its name is  | Government Sales     |
+| The department whose id is |                    250 | is in  |                 1700 | and its name is  | Retail Sales         |
+| The department whose id is |                    260 | is in  |                 1700 | and its name is  | Recruiting           |
+| The department whose id is |                    270 | is in  |                 1700 | and its name is  | Payroll              |
++----------------------------+------------------------+--------+----------------------+------------------+----------------------+
+27 rows in set (0.001 sec)
+
+4.
+select max(salary) from employees order by salary desc limit 3;
++-------------+
+| max(salary) |
++-------------+
+|    24000.00 |
++-------------+
+1 row in set (0.001 sec)
+
+
+select first_name, last_name, max(salary) from employees where salary not in (select max(salary) from employees where salary not in (select max(salary) from employees));
++------------+-----------+-------------+
+| first_name | last_name | max(salary) |
++------------+-----------+-------------+
+| Steven     | King      |    24000.00 |
++------------+-----------+-------------+
+1 row in set (0.002 sec)
+
+5.
+select first_name, last_name from employees natural join departments natural join locations natural join countries where country_id =  (select country_id from locations where city = "Toronto") ;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Pat        | Fay       |
++------------+-----------+
+1 row in set (0.002 sec)
+
+6.
+select first_name, last_name, job_id , max(salary) from employees group by job_id ;
++------------+-----------+------------+-------------+
+| first_name | last_name | job_id     | max(salary) |
++------------+-----------+------------+-------------+
+| William    | Gietz     | AC_ACCOUNT |     8300.00 |
+| Shelley    | Higgins   | AC_MGR     |    12000.00 |
+| Jennifer   | Whalen    | AD_ASST    |     4400.00 |
+| Steven     | King      | AD_PRES    |    24000.00 |
+| Neena      | Kochhar   | AD_VP      |    17000.00 |
+| Daniel     | Faviet    | FI_ACCOUNT |     9000.00 |
+| Nancy      | Greenberg | FI_MGR     |    12000.00 |
+| Susan      | Mavris    | HR_REP     |     6500.00 |
+| Alexander  | Hunold    | IT_PROG    |     9000.00 |
+| Shanta     | Vollman   | MK_MAN     |    13000.00 |
+| Pat        | Fay       | MK_REP     |     6000.00 |
+| Hermann    | Baer      | PR_REP     |    10000.00 |
+| Alexander  | Khoo      | PU_CLERK   |     3100.00 |
+| Den        | Raphaely  | PU_MAN     |    11000.00 |
+| John       | Russell   | SA_MAN     |    14000.00 |
+| Peter      | Tucker    | SA_REP     |    11500.00 |
+| Winston    | Taylor    | SH_CLERK   |     4200.00 |
+| Julia      | Nayer     | ST_CLERK   |     3600.00 |
+| Matthew    | Weiss     | ST_MAN     |     8200.00 |
++------------+-----------+------------+-------------+
+19 rows in set (0.001 sec)
+
+
+7.
+select first_name, last_name, department_name from employees natural join departments where department_name = "Finance";
++-------------+-----------+-----------------+
+| first_name  | last_name | department_name |
++-------------+-----------+-----------------+
+| Daniel      | Faviet    | Finance         |
+| John        | Chen      | Finance         |
+| Ismael      | Sciarra   | Finance         |
+| Jose Manuel | Urman     | Finance         |
+| Luis        | Popp      | Finance         |
++-------------+-----------+-----------------+
+5 rows in set (0.001 sec)
+
+
+8.
+select first_name, last_name, department_name, job_title from employees natural join jobs natural join departments ;
++-------------+------------+-----------------+-------------------------------+
+| first_name  | last_name  | department_name | job_title                     |
++-------------+------------+-----------------+-------------------------------+
+| William     | Gietz      | Accounting      | Public Accountant             |
+| Neena       | Kochhar    | Executive       | Administration Vice President |
+| Lex         | De Haan    | Executive       | Administration Vice President |
+| Daniel      | Faviet     | Finance         | Accountant                    |
+| John        | Chen       | Finance         | Accountant                    |
+| Ismael      | Sciarra    | Finance         | Accountant                    |
+| Jose Manuel | Urman      | Finance         | Accountant                    |
+| Luis        | Popp       | Finance         | Accountant                    |
+| Bruce       | Ernst      | IT              | Programmer                    |
+| David       | Austin     | IT              | Programmer                    |
+| Valli       | Pataballa  | IT              | Programmer                    |
+| Diana       | Lorentz    | IT              | Programmer                    |
+| Pat         | Fay        | Marketing       | Marketing Representative      |
+| Alexander   | Khoo       | Purchasing      | Purchasing Clerk              |
+| Shelli      | Baida      | Purchasing      | Purchasing Clerk              |
+| Sigal       | Tobias     | Purchasing      | Purchasing Clerk              |
+| Guy         | Himuro     | Purchasing      | Purchasing Clerk              |
+| Karen       | Colmenares | Purchasing      | Purchasing Clerk              |
+| Peter       | Tucker     | Sales           | Sales Representative          |
+| David       | Bernstein  | Sales           | Sales Representative          |
+| Peter       | Hall       | Sales           | Sales Representative          |
+| Christopher | Olsen      | Sales           | Sales Representative          |
+| Nanette     | Cambrault  | Sales           | Sales Representative          |
+| Oliver      | Tuvault    | Sales           | Sales Representative          |
+| Nandita     | Sarchand   | Shipping        | Shipping Clerk                |
+| Alexis      | Bull       | Shipping        | Shipping Clerk                |
+| Julia       | Dellinger  | Shipping        | Shipping Clerk                |
+| Anthony     | Cabrio     | Shipping        | Shipping Clerk                |
+| Laura       | Bissot     | Shipping        | Stock Clerk                   |
+| Mozhe       | Atkinson   | Shipping        | Stock Clerk                   |
+| James       | Marlow     | Shipping        | Stock Clerk                   |
+| TJ          | Olson      | Shipping        | Stock Clerk                   |
++-------------+------------+-----------------+-------------------------------+
+32 rows in set (0.002 sec)
+
+9.
+select CONCAT(SUBSTR(postal_code,1,3),SUBSTR(city,1,2),LENGTH(street_address)) as Location_Password from locations;
++-------------------+
+| Location_Password |
++-------------------+
+| 009Ro20           |
+| 109Ve23           |
+| 168To16           |
+| 682Hi15           |
+| 261So19           |
+| 992So19           |
+| 500So14           |
+| 981Se15           |
+| M5VTo15           |
+| YSWWh15           |
+| 190Be19           |
+| 490Bo18           |
+| 290Sy21           |
+| 540Si18           |
+| NULL              |
+| OX9Ox40           |
+| 096St17           |
+| 809Mu21           |
+| 013Sa21           |
+| 173Ge23           |
+| 309Be17           |
+| 302Ut25           |
+| 119Me21           |
++-------------------+
+23 rows in set (0.001 sec)
+
+
+10.
+ select first_name, last_name, department_name, departments.department_id from employees natural join departments where (employees.department_id) > 2 ;
+
+
+
+
+11.
+select first_name, last_name, job_title, department_name, city, country_name, region_name  from employees natural join jobs natural join departments natural join locations natural join countries natural join regions;
++-------------+------------+-------------------------------+-----------------+---------------------+--------------------------+-------------+
+| first_name  | last_name  | job_title                     | department_name | city                | country_name             | region_name |
++-------------+------------+-------------------------------+-----------------+---------------------+--------------------------+-------------+
+| Peter       | Tucker     | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| David       | Bernstein  | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| Peter       | Hall       | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| Christopher | Olsen      | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| Nanette     | Cambrault  | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| Oliver      | Tuvault    | Sales Representative          | Sales           | Oxford              | United Kingdom           | Europe      |
+| Pat         | Fay        | Marketing Representative      | Marketing       | Toronto             | Canada                   | Americas    |
+| Bruce       | Ernst      | Programmer                    | IT              | Southlake           | United States of America | Americas    |
+| David       | Austin     | Programmer                    | IT              | Southlake           | United States of America | Americas    |
+| Valli       | Pataballa  | Programmer                    | IT              | Southlake           | United States of America | Americas    |
+| Diana       | Lorentz    | Programmer                    | IT              | Southlake           | United States of America | Americas    |
+| Laura       | Bissot     | Stock Clerk                   | Shipping        | South San Francisco | United States of America | Americas    |
+| Mozhe       | Atkinson   | Stock Clerk                   | Shipping        | South San Francisco | United States of America | Americas    |
+| James       | Marlow     | Stock Clerk                   | Shipping        | South San Francisco | United States of America | Americas    |
+| TJ          | Olson      | Stock Clerk                   | Shipping        | South San Francisco | United States of America | Americas    |
+| Nandita     | Sarchand   | Shipping Clerk                | Shipping        | South San Francisco | United States of America | Americas    |
+| Alexis      | Bull       | Shipping Clerk                | Shipping        | South San Francisco | United States of America | Americas    |
+| Julia       | Dellinger  | Shipping Clerk                | Shipping        | South San Francisco | United States of America | Americas    |
+| Anthony     | Cabrio     | Shipping Clerk                | Shipping        | South San Francisco | United States of America | Americas    |
+| Alexander   | Khoo       | Purchasing Clerk              | Purchasing      | Seattle             | United States of America | Americas    |
+| Shelli      | Baida      | Purchasing Clerk              | Purchasing      | Seattle             | United States of America | Americas    |
+| Sigal       | Tobias     | Purchasing Clerk              | Purchasing      | Seattle             | United States of America | Americas    |
+| Guy         | Himuro     | Purchasing Clerk              | Purchasing      | Seattle             | United States of America | Americas    |
+| Karen       | Colmenares | Purchasing Clerk              | Purchasing      | Seattle             | United States of America | Americas    |
+| Neena       | Kochhar    | Administration Vice President | Executive       | Seattle             | United States of America | Americas    |
+| Lex         | De Haan    | Administration Vice President | Executive       | Seattle             | United States of America | Americas    |
+| Daniel      | Faviet     | Accountant                    | Finance         | Seattle             | United States of America | Americas    |
+| John        | Chen       | Accountant                    | Finance         | Seattle             | United States of America | Americas    |
+| Ismael      | Sciarra    | Accountant                    | Finance         | Seattle             | United States of America | Americas    |
+| Jose Manuel | Urman      | Accountant                    | Finance         | Seattle             | United States of America | Americas    |
+| Luis        | Popp       | Accountant                    | Finance         | Seattle             | United States of America | Americas    |
+| William     | Gietz      | Public Accountant             | Accounting      | Seattle             | United States of America | Americas    |
++-------------+------------+-------------------------------+-----------------+---------------------+--------------------------+-------------+
+32 rows in set (0.002 sec)
+
+
+12.
+select min_salary, department_id from jobs natural join departments where min_salary < 5000 group by department_id;
++------------+---------------+
+| min_salary | department_id |
++------------+---------------+
+|       4200 |            10 |
+|       4200 |            20 |
+|       4200 |            30 |
+|       4200 |            40 |
+|       4200 |            50 |
+|       4200 |            60 |
+|       4200 |            70 |
+|       4200 |            80 |
+|       4200 |            90 |
+|       4200 |           100 |
+|       4200 |           110 |
+|       4200 |           120 |
+|       4200 |           130 |
+|       4200 |           140 |
+|       4200 |           150 |
+|       4200 |           160 |
+|       4200 |           170 |
+|       4200 |           180 |
+|       4200 |           190 |
+|       4200 |           200 |
+|       4200 |           210 |
+|       4200 |           220 |
+|       4200 |           230 |
+|       4200 |           240 |
+|       4200 |           250 |
+|       4200 |           260 |
+|       4200 |           270 |
++------------+---------------+
+27 rows in set (0.001 sec)
+
+
+13.
+select first_name, last_name, job_title from employees natural join jobs where department_id = 20;
++------------+-----------+--------------------------+
+| first_name | last_name | job_title                |
++------------+-----------+--------------------------+
+| Michael    | Hartstein | Marketing Manager        |
+| Pat        | Fay       | Marketing Representative |
++------------+-----------+--------------------------+
+2 rows in set (0.001 sec)
+
+14.
+create view empClerk as select first_name, last_name, jobs.job_id, max(salary) from employees inner join jobs on employees.job_id = jobs.job_id where job_title like "%Clerk"
+    -> ;
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [hr]> select * from empClerk;
++------------+-----------+----------+-------------+
+| first_name | last_name | job_id   | max(salary) |
++------------+-----------+----------+-------------+
+| Alexander  | Khoo      | PU_CLERK |     4200.00 |
++------------+-----------+----------+-------------+
+1 row in set (0.001 sec)
+
+
+
+
+
+
+Procedure
+DELIMITER $$
+CREATE PROCEDURE my_proc (IN regid INT, IN regname varchar)
+BEGIN
+insert into regions values(regid, regname);
+END$$
+DELIMITER ;
+call my_proc(2, "XYZ");
+
+
+DELIMITER $$
+CREATE PROCEDURE my_proc (IN cid INT, IN cname varchar, IN regid INT)
+BEGIN
+insert into countries values(cid,cname,regid);
+END$$
+DELIMITER ;
+call my_proc(3, "ABC", 5);
+

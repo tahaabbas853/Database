@@ -1,0 +1,167 @@
+			DSLAB 06 TASK
+			
+			
+NAME: TAHA ABBAS
+CLASS: BSCS-4A
+ROLL NO: P200119
+DATE: 25 03 2022
+------------------------------------------------------------
+
+
+
+E4.1 Write a query that displays the average hourly rate that has been paid to all employees. Your query should return €7.03
+
+SELECT AVG(HOUR_RATE) FROM HOURS;
++----------------+
+| AVG(HOUR_RATE) |
++----------------+
+|       7.033636 |
++----------------+
+
+E4.2 Write a query that displays the average attraction age for all attractions where the PARK_CODE is equal to ‘UK3452’. Your query should return 7.25 years.
+
+SELECT AVG(ATTRACT_AGE) FROM ATTRACTION WHERE PARK_CODE = 'UK3452'; 
++------------------+
+| AVG(ATTRACT_AGE) |
++------------------+
+|           7.2500 |
++------------------+
+
+
+
+E4.3 Display the employee numbers of all employees and the total number of hours they have worked.
+
+SELECT EMP_NUM, SUM(HOURS_PER_ATTRACT) FROM HOURS GROUP BY EMP_NUM;
++---------+------------------------+
+| EMP_NUM | SUM(HOURS_PER_ATTRACT) |
++---------+------------------------+
+|     100 |                     12 |
+|     101 |                      6 |
+|     102 |                     12 |
+|     104 |                     12 |
+|     105 |                     12 |
++---------+------------------------+
+
+E4.4 Show the attraction number and the minimum and maximum hourly rate for each attraction.
+
+SELECT ATTRACT_NO, MIN(HOUR_RATE), MAX(HOUR_RATE) FROM HOURS GROUP BY ATTRACT_NO;
++------------+----------------+----------------+
+| ATTRACT_NO | MIN(HOUR_RATE) | MAX(HOUR_RATE) |
++------------+----------------+----------------+
+|      10034 |           6.50 |           6.50 |
+|      10078 |           8.50 |           8.50 |
+|      10098 |           8.50 |           8.50 |
+|      30011 |           7.20 |           7.20 |
+|      30012 |           5.99 |           7.20 |
+|      30044 |           5.99 |           5.99 |
++------------+----------------+----------------+
+
+E4.5 Using the HOURS table, write a query to display the employee number (EMP_NUM), the attraction number (ATTRACT-NO) and the average hours worked per attraction (HOURS_PER_ATTRACT) limiting the result to where the average hours worked per attraction is greater or equal to 5.
+
+SELECT EMP_NUM, ATTRACT_NO, AVG(HOURS_PER_ATTRACT) FROM HOURS GROUP BY EMP_NUM, ATTRACT_NO HAVING AVG(HOURS_PER_ATTRACT)>=5;
++---------+------------+------------------------+
+| EMP_NUM | ATTRACT_NO | AVG(HOURS_PER_ATTRACT) |
++---------+------------+------------------------+
+|     100 |      10034 |                 6.0000 |
+|     101 |      10034 |                 6.0000 |
+|     104 |      30011 |                 6.0000 |
+|     104 |      30012 |                 6.0000 |
++---------+------------+------------------------+
+
+
+E 4.6 Write a CROSS JOIN query which selects all rows from the EMPLOYEE and HOURS tables. How many rows were returned?
+
+SELECT * FROM EMPLOYEE CROSS JOIN HOURS;
+77 rows in set (0.001 sec)
+
+
+E.4.7 Write a query that displays the employees first and last name (EMP_FNAME and EMP_LNAME), the attraction number(ATTRACT_NO) and the date worked. Hint: (You will have to join the HOURS and the EMPLOYEE tables.
+
+SELECT E.EMP_NUM, EMP_LNAME, EMP_FNAME, ATTRACT_NO, DATE_WORKED FROM EMPLOYEE E INNER JOIN HOURS H ON E.EMP_NUM = H.EMP_NUM;
++---------+------------+-----------+------------+-------------+
+| EMP_NUM | EMP_LNAME  | EMP_FNAME | ATTRACT_NO | DATE_WORKED |
++---------+------------+-----------+------------+-------------+
+|     100 | Calderdale | Emma      |      10034 | 2007-05-18  |
+|     100 | Calderdale | Emma      |      10034 | 2007-05-20  |
+|     101 | Ricardo    | Marshel   |      10034 | 2007-05-18  |
+|     102 | Arshad     | Arif      |      30012 | 2007-05-23  |
+|     102 | Arshad     | Arif      |      30044 | 2007-05-21  |
+|     102 | Arshad     | Arif      |      30044 | 2007-05-22  |
+|     104 | Denver     | Enrica    |      30011 | 2007-05-21  |
+|     104 | Denver     | Enrica    |      30012 | 2007-05-22  |
+|     105 | Namowa     | Mirrelle  |      10078 | 2007-05-18  |
+|     105 | Namowa     | Mirrelle  |      10098 | 2007-05-18  |
+|     105 | Namowa     | Mirrelle  |      10098 | 2007-05-19  |
++---------+------------+-----------+------------+-------------+
+
+E4.8 Rewrite the query you wrote in E 4.7 so that the attraction name (ATTRACT_NAME located in the ATTRACTION table) is also displayed. Hint: (You will need to join three tables.
+
+SELECT EMP_LNAME, EMP_FNAME, H.ATTRACT_NO, ATTRACT_NAME FROM ((HOURS H INNER JOIN EMPLOYEE E ON H.EMP_NUM = E.EMP_NUM) INNER JOIN ATTRACTION A ON H.ATTRACT_NO = A.ATTRACT_NO) ;
++------------+-----------+------------+----------------+
+| EMP_LNAME  | EMP_FNAME | ATTRACT_NO | ATTRACT_NAME   |
++------------+-----------+------------+----------------+
+| Calderdale | Emma      |      10034 | ThunderCoaster |
+| Calderdale | Emma      |      10034 | ThunderCoaster |
+| Ricardo    | Marshel   |      10034 | ThunderCoaster |
+| Arshad     | Arif      |      30012 | Pirates        |
+| Arshad     | Arif      |      30044 | UnderSeaWord   |
+| Arshad     | Arif      |      30044 | UnderSeaWord   |
+| Denver     | Enrica    |      30011 | BlackHole2     |
+| Denver     | Enrica    |      30012 | Pirates        |
+| Namowa     | Mirrelle  |      10078 | Ant-Trap       |
+| Namowa     | Mirrelle  |      10098 | Carnival       |
+| Namowa     | Mirrelle  |      10098 | Carnival       |
++------------+-----------+------------+----------------+
+
+E4.9 Display the park names and total sales for Theme Parks who are located in the country ‘UK’ or ‘FR’.
+
+SELECT THEMEPARK.PARK_NAME , sum(LINE_PRICE)  FROM SALES JOIN THEMEPARK USING(PARK_CODE) JOIN SALES_LINE USING(TRANSACTION_NO)  WHERE PARK_COUNTRY = 'FR' OR PARK_COUNTRY = 'UK' GROUP BY PARK_NAME ;
++--------------+-----------------+
+| PARK_NAME    | sum(LINE_PRICE) |
++--------------+-----------------+
+| FairyLand    |          401.86 |
+| PleasureLand |          851.00 |
++--------------+-----------------+
+
+
+E4.10 List the sale date, line quantity and line price of all transactions on the 18 th May 2007.
+Hint: (Remember the format of MySQL dates is ‘2007-05-18’).
+
+SELECT SALE_DATE , LINE_QTY , LINE_PRICE FROM SALES_LINE JOIN SALES USING(TRANSACTION_NO) WHERE SALE_DATE = '2007-05-18';
++------------+----------+------------+
+| SALE_DATE  | LINE_QTY | LINE_PRICE |
++------------+----------+------------+
+| 2007-05-18 |        2 |      69.98 |
+| 2007-05-18 |        1 |      14.99 |
+| 2007-05-18 |        2 |      69.98 |
+| 2007-05-18 |        2 |      41.98 |
+| 2007-05-18 |        1 |      14.99 |
+| 2007-05-18 |        1 |      14.99 |
+| 2007-05-18 |        1 |      34.99 |
+| 2007-05-18 |        4 |     139.96 |
+| 2007-05-18 |        4 |     168.40 |
+| 2007-05-18 |        1 |      22.50 |
+| 2007-05-18 |        2 |      21.98 |
+| 2007-05-18 |        2 |      84.20 |
+| 2007-05-18 |        2 |      21.98 |
+| 2007-05-18 |        2 |      84.20 |
+| 2007-05-18 |        1 |      22.50 |
+| 2007-05-18 |        2 |      21.98 |
+| 2007-05-18 |        2 |      21.98 |
+| 2007-05-18 |        2 |      84.20 |
+| 2007-05-18 |        4 |     168.40 |
+| 2007-05-18 |        1 |      22.50 |
+| 2007-05-18 |        2 |      21.98 |
+| 2007-05-18 |        2 |      84.20 |
+| 2007-05-18 |        2 |      57.34 |
+| 2007-05-18 |        2 |      37.12 |
+| 2007-05-18 |        2 |      57.34 |
+| 2007-05-18 |        2 |      37.12 |
+| 2007-05-18 |        1 |      18.56 |
+| 2007-05-18 |        1 |      12.12 |
+| 2007-05-18 |        4 |     114.68 |
+| 2007-05-18 |        2 |      57.34 |
+| 2007-05-18 |        2 |      37.12 |
++------------+----------+------------+
+
+

@@ -1,0 +1,252 @@
+SELECT DEP, COUNT(NAME), FROM STD GROUP BY DEP HAVING COUNT(*/ NAME) > 1;
+SELECT PARK_CODE, MIN(TICKET_PRICE),MAX(TICKET_PRICE) FROM TICKET GROUP BY PARK_CODE;
++-----------+-------------------+-------------------+
+| PARK_CODE | MIN(TICKET_PRICE) | MAX(TICKET_PRICE) |
++-----------+-------------------+-------------------+
+| FR1001    |             18.99 |             34.99 |
+| SP4533    |             10.99 |             24.99 |
+| UK3452    |             10.99 |             42.10 |
+| ZA1342    |             12.12 |             28.67 |
++-----------+-------------------+-------------------+
+
+
+
+SELECT PARK_CODE,AVG(TICKET_PRICE) FROM TICKET GROUP BY PARK_CODE HAVING AVG(TICKET_PRICE)>10.99;
++-----------+-------------------+
+| PARK_CODE | AVG(TICKET_PRICE) |
++-----------+-------------------+
+| FR1001    |         24.990000 |
+| SP4533    |         16.990000 |
+| UK3452    |         25.196667 |
+| ZA1342    |         19.783333 |
++-----------+-------------------+
+
+SELECT COUNT(*) FROM TICKET;
++----------+
+| COUNT(*) |
++----------+
+|       12 |
++----------+
+
+
+SELECT COUNT(TICKET_NO) FROM TICKET;
++------------------+
+| COUNT(TICKET_NO) |
++------------------+
+|               12 |
++------------------+
+
+
+SELECT DISTINCT(PARK_CODE) FROM TICKET;
++-----------+
+| PARK_CODE |
++-----------+
+| FR1001    |
+| SP4533    |
+| UK3452    |
+| ZA1342    |
++-----------+
+
+SELECT DISTINCT(PARK_CODE) AS CODES FROM TICKET;
++--------+
+| CODES  |
++--------+
+| FR1001 |
+| SP4533 |
+| UK3452 |
+| ZA1342 |
++--------+
+
+
+SELECT  TICKET_TYPE,(PARK_CODE) FROM TICKET;
++-------------+-----------+
+| TICKET_TYPE | PARK_CODE |
++-------------+-----------+
+| Adult       | SP4533    |
+| Child       | SP4533    |
+| Senior      | SP4533    |
+| Child       | FR1001    |
+| Adult       | FR1001    |
+| Senior      | FR1001    |
+| Child       | ZA1342    |
+| Adult       | ZA1342    |
+| Senior      | ZA1342    |
+| Child       | UK3452    |
+| Adult       | UK3452    |
+| Senior      | UK3452    |
++-------------+-----------+
+
+SELECT SUM(TICKET_PRICE) FROM TICKET;
++-------------------+
+| SUM(TICKET_PRICE) |
++-------------------+
+|            260.88 |
++-------------------+
+
+
+SELECT PARK_CODE,AVG(TICKET_PRICE) FROM TICKET GROUP BY PARK_CODE;
++-----------+-------------------+
+| PARK_CODE | AVG(TICKET_PRICE) |
++-----------+-------------------+
+| FR1001    |         24.990000 |
+| SP4533    |         16.990000 |
+| UK3452    |         25.196667 |
+| ZA1342    |         19.783333 |
++-----------+-------------------+
+
+
+SELECT THEMEPARK.PARK_CODE, PARK_NAME, TICKET_PRICE, TICKET_TYPE FROM THEMEPARK, TICKET WHERE THEMEPARK.PARK_CODE = TICKET.PARK_CODE ORDER BY PARK_CODE;
++-----------+---------------+--------------+-------------+
+| PARK_CODE | PARK_NAME     | TICKET_PRICE | TICKET_TYPE |
++-----------+---------------+--------------+-------------+
+| FR1001    | FairyLand     |        20.99 | Senior      |
+| FR1001    | FairyLand     |        34.99 | Adult       |
+| FR1001    | FairyLand     |        18.99 | Child       |
+| SP4533    | AdventurePort |        10.99 | Senior      |
+| SP4533    | AdventurePort |        14.99 | Child       |
+| SP4533    | AdventurePort |        24.99 | Adult       |
+| UK3452    | PleasureLand  |        42.10 | Adult       |
+| UK3452    | PleasureLand  |        22.50 | Child       |
+| UK3452    | PleasureLand  |        10.99 | Senior      |
+| ZA1342    | GoldTown      |        12.12 | Senior      |
+| ZA1342    | GoldTown      |        28.67 | Adult       |
+| ZA1342    | GoldTown      |        18.56 | Child       |
++-----------+---------------+--------------+-------------+
+12 rows in set (0.001 sec)
+
+
+SELECT P.PARK_CODE, PARK_NAME, TICKET_PRICE, TICKET_TYPE FROM THEMEPARK P, TICKET T WHERE P.PARK_CODE = T.PARK_CODE ORDER BY PARK_CODE;
++-----------+---------------+--------------+-------------+
+| PARK_CODE | PARK_NAME     | TICKET_PRICE | TICKET_TYPE |
++-----------+---------------+--------------+-------------+
+| FR1001    | FairyLand     |        20.99 | Senior      |
+| FR1001    | FairyLand     |        34.99 | Adult       |
+| FR1001    | FairyLand     |        18.99 | Child       |
+| SP4533    | AdventurePort |        10.99 | Senior      |
+| SP4533    | AdventurePort |        14.99 | Child       |
+| SP4533    | AdventurePort |        24.99 | Adult       |
+| UK3452    | PleasureLand  |        42.10 | Adult       |
+| UK3452    | PleasureLand  |        22.50 | Child       |
+| UK3452    | PleasureLand  |        10.99 | Senior      |
+| ZA1342    | GoldTown      |        12.12 | Senior      |
+| ZA1342    | GoldTown      |        28.67 | Adult       |
+| ZA1342    | GoldTown      |        18.56 | Child       |
++-----------+---------------+--------------+-------------+
+12 rows in set (0.001 sec)
+
+
+SELECT PARK_CODE, PARK_NAME, TICKET_PRICE, TICKET_TYPE FROM THEMEPARK NATURAL JOIN TICKET ORDER BY PARK_CODE;
++-----------+---------------+--------------+-------------+
+| PARK_CODE | PARK_NAME     | TICKET_PRICE | TICKET_TYPE |
++-----------+---------------+--------------+-------------+
+| FR1001    | FairyLand     |        20.99 | Senior      |
+| FR1001    | FairyLand     |        34.99 | Adult       |
+| FR1001    | FairyLand     |        18.99 | Child       |
+| SP4533    | AdventurePort |        10.99 | Senior      |
+| SP4533    | AdventurePort |        14.99 | Child       |
+| SP4533    | AdventurePort |        24.99 | Adult       |
+| UK3452    | PleasureLand  |        42.10 | Adult       |
+| UK3452    | PleasureLand  |        22.50 | Child       |
+| UK3452    | PleasureLand  |        10.99 | Senior      |
+| ZA1342    | GoldTown      |        12.12 | Senior      |
+| ZA1342    | GoldTown      |        28.67 | Adult       |
+| ZA1342    | GoldTown      |        18.56 | Child       |
++-----------+---------------+--------------+-------------+
+12 rows in set (0.001 sec)
+
+
+SELECT PARK_CODE, PARK_NAME, TICKET_PRICE, TICKET_TYPE FROM THEMEPARK JOIN TICKET USING(PARK_CODE) ORDER BY PARK_CODE;
++-----------+---------------+--------------+-------------+
+| PARK_CODE | PARK_NAME     | TICKET_PRICE | TICKET_TYPE |
++-----------+---------------+--------------+-------------+
+| FR1001    | FairyLand     |        20.99 | Senior      |
+| FR1001    | FairyLand     |        34.99 | Adult       |
+| FR1001    | FairyLand     |        18.99 | Child       |
+| SP4533    | AdventurePort |        10.99 | Senior      |
+| SP4533    | AdventurePort |        14.99 | Child       |
+| SP4533    | AdventurePort |        24.99 | Adult       |
+| UK3452    | PleasureLand  |        42.10 | Adult       |
+| UK3452    | PleasureLand  |        22.50 | Child       |
+| UK3452    | PleasureLand  |        10.99 | Senior      |
+| ZA1342    | GoldTown      |        12.12 | Senior      |
+| ZA1342    | GoldTown      |        28.67 | Adult       |
+| ZA1342    | GoldTown      |        18.56 | Child       |
++-----------+---------------+--------------+-------------+
+12 rows in set (0.001 sec)
+
+
+RECOMMENDED----------------------
+SELECT P.PARK_CODE, PARK_NAME, TICKET_PRICE, TICKET_TYPE FROM THEMEPARK P INNER JOIN TICKET T ON P.PARK_CODE = T.PARK_CODE ORDER BY PARK_CODE;
++-----------+---------------+--------------+-------------+
+| PARK_CODE | PARK_NAME     | TICKET_PRICE | TICKET_TYPE |
++-----------+---------------+--------------+-------------+
+| FR1001    | FairyLand     |        20.99 | Senior      |
+| FR1001    | FairyLand     |        34.99 | Adult       |
+| FR1001    | FairyLand     |        18.99 | Child       |
+| SP4533    | AdventurePort |        10.99 | Senior      |
+| SP4533    | AdventurePort |        14.99 | Child       |
+| SP4533    | AdventurePort |        24.99 | Adult       |
+| UK3452    | PleasureLand  |        42.10 | Adult       |
+| UK3452    | PleasureLand  |        22.50 | Child       |
+| UK3452    | PleasureLand  |        10.99 | Senior      |
+| ZA1342    | GoldTown      |        12.12 | Senior      |
+| ZA1342    | GoldTown      |        28.67 | Adult       |
+| ZA1342    | GoldTown      |        18.56 | Child       |
++-----------+---------------+--------------+-------------+
+12 rows in set (0.001 sec)
+
+
+
+
+SELECT PARK_NAME, SUM(LINE_PRICE) AS TOTAL_SALES FROM ((SALES S INNER JOIN THEMEPARK P ON P.PARK_CODE = S.PARK_CODE) INNER JOIN SALES_LINE L ON S.TRANSACTION_NO = L.TRANSACTION_NO)WHERE PARK_COUNTRY = 'UK' OR PARK_COUNTRY = 'FR' ;
++-----------+-------------+
+| PARK_NAME | TOTAL_SALES |
++-----------+-------------+
+| FairyLand |     1252.86 |
++-----------+-------------+
+1 row in set (0.001 sec)
+
+
+SELECT THEMEPARK.PARK_NAME , sum(LINE_PRICE)  FROM SALES JOIN THEMEPARK USING(PARK_CODE) JOIN SALES_LINE USING(TRANSACTION_NO)  WHERE PARK_COUNTRY = 'FR' OR PARK_COUNTRY = 'UK' GROUP BY PARK_NAME ;
++--------------+-----------------+
+| PARK_NAME    | sum(LINE_PRICE) |
++--------------+-----------------+
+| FairyLand    |          401.86 |
+| PleasureLand |          851.00 |
++--------------+-----------------+
+2 rows in set (0.001 sec)
+
+
+
+[4:10 PM, 4/1/2022] Shareef Fast: SELECT DISTINCT EMP_FNAME, EMP_LNAME FROM EMPLOYEE NATURAL JOIN HOURS WHERE(  HOUR_RATE >= (SELECT AVG(HOUR_RATE) FROM HOURS);
+[4:10 PM, 4/1/2022] Shareef Fast: Q1
+
+[4:10 PM, 4/1/2022] Shareef Fast: select EMPLOYEE.EMP_FNAME,EMPLOYEE.EMP_LNAME,HOURS.DATE_WORKED,(select avg(HOURS_PER_ATTRACT)from HOURS) as Average,(HOURS.HOURS_PER_ATTRACT-(select avg(HOURS_PER_ATTRACT)from HOURS)) as Difference from EMPLOYEE, HOURS, ATTRACTION where EMPLOYEE.EMP_NUM = HOURS.EMP_NUM and HOURS.ATTRACT_NO = ATTRACTION.ATTRACT_NO;
+[4:10 PM, 4/1/2022] Shareef Fast: Q2
+
+[4:10 PM, 4/1/2022] Shareef Fast: select ATTRACT_CAPACITY FROM ATTRACTION WHERE ATTRACT_CAPACITY <=(SELECT AVG(ATTRACT_CAPACITY)FROM ATTRACTION)
+
+
+select hotelno, roomno, g.guestno, guestname, guestaddress from (booking b inner join guest g on b.guestno = g.guestno) where guestaddress like "Glasgow";
+
+SELECT hotelno, COUNT(roomno) AS count FROM room r, hotel h WHERE r.hotelno = h.hotelno AND city = 'London' GROUP BY hotelno;
+
+
+select b.roomno, b.hotelno from (select hotelno from booking where Year(datefrom) and Year(dateto) between 2005 and 2010);
+
+
+
+SELECT * from guest WHERE guestno = (SELECT guestno FROM booking WHERE datefrom <= CURRENT_DATE AND dateto >= CURRENT_DATE AND hotelno =(select hotelno from hotel where hotelname = 'Watergate')); 
+ 
+select * from guest where guestno = (select guestno from booking where datefrom <= CURRENT_DATE and dateto >= CURRENT_DATE  and hotelno = (select hotelno from hotel where hotelname = 'Watergate'));
+
+
+
+Select  roomno, hotel.hotelno, hotelname from hotel INNER JOIN room on hotel.hotelno = room.hotelno where price = (select max(price) from room where price not in (select max(price) from room)); 
+
+
+
+
+
+
+

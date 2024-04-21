@@ -1,0 +1,66 @@
+				DSLAB 07 TASK
+			
+			
+NAME: TAHA ABBAS
+CLASS: BSCS-4A
+ROLL NO: P200119
+DATE: 01 04 2022
+------------------------------------------------------------
+
+
+E 5.1 Write a query that displays the first name, last name of all employees who earn more than the average hourly rate. Do not display duplicate rows.
+
+
+
+SELECT DISTINCT EMP_FNAME,EMP_LNAME FROM EMPLOYEE  INNER JOIN HOURS ON EMPLOYEE.EMP_NUM = HOURS.EMP_NUM WHERE HOUR_RATE >= (SELECT AVG(HOUR_RATE) FROM HOURS);
++-----------+-----------+
+| EMP_FNAME | EMP_LNAME |
++-----------+-----------+
+| Enrica    | Denver    |
+| Mirrelle  | Namowa    |
++-----------+-----------+
+
+E.5.2 Write a query to display an employee’s first name, last name and date worked
+which lists the difference between the number of hours an employee has worked on an
+attraction and the average hours worked on that attraction. Label this column
+‘DIFFERENCE’ and the average hours column ‘AVERAGE’.
+
+SELECT E.EMP_FNAME, E.EMP_LNAME, H.DATE_WORKED,(SELECT AVG(HOURS_PER_ATTRACT)FROM HOURS) AS AVERAGE, (H.HOURS_PER_ATTRACT-(SELECT AVG(HOURS_PER_ATTRACT)FROM HOURS)) AS DIFFERENCE FROM EMPLOYEE E, HOURS H, ATTRACTION A WHERE E.EMP_NUM = H.EMP_NUM AND H.ATTRACT_NO = A.ATTRACT_NO;
+
++-----------+------------+-------------+---------+------------+
+| EMP_FNAME | EMP_LNAME  | DATE_WORKED | AVERAGE | DIFFERENCE |
++-----------+------------+-------------+---------+------------+
+| Emma      | Calderdale | 2007-05-18  |  4.9091 |     1.0909 |
+| Emma      | Calderdale | 2007-05-20  |  4.9091 |     1.0909 |
+| Marshel   | Ricardo    | 2007-05-18  |  4.9091 |     1.0909 |
+| Arif      | Arshad     | 2007-05-23  |  4.9091 |    -1.9091 |
+| Arif      | Arshad     | 2007-05-21  |  4.9091 |     1.0909 |
+| Arif      | Arshad     | 2007-05-22  |  4.9091 |    -1.9091 |
+| Enrica    | Denver     | 2007-05-21  |  4.9091 |     1.0909 |
+| Enrica    | Denver     | 2007-05-22  |  4.9091 |     1.0909 |
+| Mirrelle  | Namowa     | 2007-05-18  |  4.9091 |    -1.9091 |
+| Mirrelle  | Namowa     | 2007-05-18  |  4.9091 |    -1.9091 |
+| Mirrelle  | Namowa     | 2007-05-19  |  4.9091 |     1.0909 |
++-----------+------------+-------------+---------+------------+
+
+
+
+
+
+E 5.3 Write a query to find the attract capacity, with a attract capacity less than or equal
+to the average attract capacity.
+
+SELECT ATTRACT_CAPACITY FROM ATTRACTION WHERE ATTRACT_CAPACITY <=(SELECT AVG(ATTRACT_CAPACITY)FROM ATTRACTION);
++------------------+
+| ATTRACT_CAPACITY |
++------------------+
+|               34 |
+|               62 |
+|               24 |
+|               30 |
+|               40 |
+|               34 |
+|               42 |
++------------------+
+
+
